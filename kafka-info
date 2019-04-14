@@ -1,0 +1,20 @@
+Kafka Installation
+-----------------------
+
+1.download kafka from kafka sites(kafka_2.12-2.2.0.tgz)
+2.move to installtion folder
+3.open terminal execute tar -xvf kafka_2.12-2.2.0.tgz
+4.set the path in .bashrc file
+5.create the folder for log storage of zookeeper and kafka(let kafka_2.12-2.2.0/data/zookeeper and kafka_2.12-2.2.0.tgz/data/kafka folder created)
+6.Modify the file kafka_2.12-2.2.0/config/zookeeper.properties and add the dataDir=/home/antique/kafka/kafka_2.12-2.2.0/data/zookeeper line.
+7.Start the zookeeper by running following cmd
+zookeeper-server-start.sh config/zookeeper.properties
+zookeeper will get started on port 2181.
+8.Modify the file kafka_2.12-2.2.0/config/server.properties and add the dataDir=/home/antique/kafka/kafka_2.12-2.2.0/data/kafka line.
+9.execute the following cmd to start kafka server
+kafka-server-start.sh config/server.properties
+now kafka server will get started on port 
+
+now open terminal
+create the topic(first_topic)
+kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 1
