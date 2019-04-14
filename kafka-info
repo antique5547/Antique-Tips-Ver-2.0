@@ -1,20 +1,46 @@
 Kafka Installation
 -----------------------
 
-1.download kafka from kafka sites(kafka_2.12-2.2.0.tgz)
-2.move to installtion folder
-3.open terminal execute tar -xvf kafka_2.12-2.2.0.tgz
-4.set the path in .bashrc file
+1.Download kafka from kafka sites(kafka_2.12-2.2.0.tgz)
+2.Move to installtion folder
+3.Open terminal execute tar -xvf kafka_2.12-2.2.0.tgz
+4.Set the path in .bashrc file
 5.create the folder for log storage of zookeeper and kafka(let kafka_2.12-2.2.0/data/zookeeper and kafka_2.12-2.2.0.tgz/data/kafka folder created)
 6.Modify the file kafka_2.12-2.2.0/config/zookeeper.properties and add the dataDir=/home/antique/kafka/kafka_2.12-2.2.0/data/zookeeper line.
 7.Start the zookeeper by running following cmd
 zookeeper-server-start.sh config/zookeeper.properties
 zookeeper will get started on port 2181.
 8.Modify the file kafka_2.12-2.2.0/config/server.properties and add the dataDir=/home/antique/kafka/kafka_2.12-2.2.0/data/kafka line.
-9.execute the following cmd to start kafka server
+9.Execute the following cmd to start kafka server
 kafka-server-start.sh config/server.properties
 now kafka server will get started on port 
 
+Kafka Topic CLI
+--------------------------
 now open terminal
-create the topic(first_topic)
+1.Create the topic(first_topic)
 kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 1
+
+2. List All the topics
+kafka-topics.sh --zookeeper localhost:2181 --list
+
+3. Describe the specific topic
+kafka-topics.sh --zookeeper localhost:2181 --topic first_topic --describe
+
+4. Delete the topic
+kafka-topics.sh --zookeeper localhost:2181 --topic first_topic --delete
+
+Kafka Console Producer CLI
+------------------------------
+to produce the message
+kafka-console-producer.sh --broker-list localhost:9092 --topic first_topic
+then it will connect to kafka server and ask you to write the message to produce to specific topic
+
+Note : While producing the message to new topic which is not existed then kafka will create the new topic by using default configuration.
+
+Kafka Console Consumer CLI
+-----------------------------
+to consume the produce message of specific topic
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic
+or
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --from-begining
